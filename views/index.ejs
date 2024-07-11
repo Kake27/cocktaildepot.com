@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CocktailAPI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <header>
+        <h1 class="page-title">www.cocktaildepot.com</h1>
+    </header>
+
+    <div class="page-body">
+        <div class="generate-random">
+            <h2>Don't know what you are looking for? Press the button below to get a random suggestion!</h2>
+            <form action="/random" method="GET">
+                <button>Random Drink</button>
+            </form>
+        </div>
+        <hr>
+
+        <div class="body-main">
+            <form action="/search" method="GET" class="search-input">
+                <input type="text" placeholder="Search here" id="input search" name="request">
+                <button>Search</button>
+            </form>
+
+            <!-- No functionality yet -->
+            <div class="filters"> 
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="toggleCategory()">
+                        Category
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg>
+                    </button>
+                    <div id="categoryDropdown" class="dropdown-content">
+                      <% categories.forEach(category => {%>
+                        <a href="#" onclick="toggleCategory()"><%= category%></a>
+                      <%})%>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="toggleGlass()">
+                        Glasses
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg>
+                    </button>
+                    <div id="glassDropdown" class="dropdown-content">
+                      <% glasses.forEach(glass => {%>
+                        <a href="#" onclick="toggleGlass()"><%= glass%></a>
+                      <%})%>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="toggleIngredient()">
+                        Ingredient
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg>
+                    </button>
+                    <div id="ingredientDropdown" class="dropdown-content">
+                      <% ingredients.forEach(ingredient => {%>
+                        <a href="#" onclick="toggleIngredient()"><%= ingredient%></a>
+                      <%})%>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="toggleAlcohol()">
+                        Alcohol 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg>
+                    </button>
+
+                    <div id="alcoholDropdown" class="dropdown-content">
+                      <% alcohols.forEach(alcohol => {%>
+                        <a href="#" onclick="toggleAlcohol()"><%= alcohol%></a>
+                      <%})%>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="display-items">
+            <% if(data) {%>
+            
+                <% for(var j=0; j<data.length; j++){%>
+                
+                    <div class="display-card">
+                        <img src=<%=data[j].strDrinkThumb%> alt="cocktail image">
+                
+                        <div class="about">
+                            <h1 class="cocktail-name"><%=data[j].strDrink%></h1>
+                            <p class="cocktail-cat"><span>Category: &nbsp;&nbsp;</span><%=data[j].strCategory%>, &emsp;<%=data[j].strAlcoholic%></p>
+                            <p class="cocktail-glass"><span>Glass Type: &nbsp;&nbsp;</span><%=data[j].strGlass%></p>
+                            <ul class="cocktail-ingredients"><span>Ingredients:</span>
+                                <% if(data.length===1) {%>
+                                        <% for(var i=0; i<combined.length; i++) {%>
+                                                <li>&nbsp;&nbsp;<%=combined[i][0]%> <%=combined[i][1]%></li>
+                                            <%}%>
+                                <%} else {%>
+                                        <% for(var i=0; i<combined[j].length; i++){%>
+                                            <li>&emsp;&emsp;<%= combined[j][i][0]%> <%=combined[j][i][1]%></li>
+                                        <%}%>
+                                <%}%>
+                            </ul>
+                            <h3><span>Instructions:</span></h3>
+                            <p class="cocktail-instructions"><%=data[j].strInstructions%></p>
+                        </div>
+                    </div>
+                    <% if(data.length>1){%>
+                            <hr class="separator">
+            <%}}} else {%>
+                <div class="about">
+                    <h1>Are you drunk or something?</h1>
+                </div>
+                <%}%>
+        </div>
+
+        <footer>
+            <h4>Copyright 2024 Kake INC</h4>
+        </footer>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
