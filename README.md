@@ -1,0 +1,1 @@
+This a small project that I made for getting acquainted with using APIs. In this case, I have used the Cocktail API (from https://www.thecocktaildb.com/api.php). The site has basic functionalities of either recommending a random cocktail recipe or providing results based on your search.
