@@ -247,3 +247,28 @@ footer {
         padding-right: 10px;
     }
 }
+
+@media(max-width: 425px){
+    .page-title {
+        font-size: 150%;
+    }
+    .search-input button {
+        margin-top: 5px;
+    }
+
+    .display-card img {
+        width: 70%;
+        height: auto;
+        margin: auto;
+        margin-top: 2rem;
+    }
+
+    .search-input input {
+        width: 80%;
+    }
+
+    .generate-random form button {
+        width: 80%;
+    }
+
+}
